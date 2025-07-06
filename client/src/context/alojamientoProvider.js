@@ -1,5 +1,5 @@
 import {createContext, useEffect, useState} from "react";
-import { getAlojamientosFiltrados } from "../api/alojamientosAPI";
+import { getAlojamientos } from "../api/alojamientosAPI";
 
 
 export const AlojamientosContext = createContext()
@@ -7,7 +7,7 @@ export const AlojamientosContext = createContext()
 export const AlojamientosProvider = ({children}) => {
 
   const [alojamientos, setAlojamientos] = useState([]);
-
+  const [errorAlojamientos, setErrorAlojamientos] = useState(undefined)
   const parseFotos = (alojamiento) => {
     return alojamiento.fotos.length === 0 
     ? {...alojamiento, fotos: mockFotosAlojamiento()} 
@@ -35,15 +35,27 @@ export const AlojamientosProvider = ({children}) => {
     return alojamientos.find(alojamiento => alojamiento.id === idAlojamiento)
   }
 
+  const cargaInicial = async () => {
+    try {
+      const alojamientos = await getAlojamientos()
+      parseIdYFotos(alojamientos)
+    } catch (error) {
+      setErrorAlojamientos(error.message)
+      await new Promise((resolve) => { setTimeout(() => {}, 5000) })
+    }
+  } 
+
   useEffect(() => {
-    const cargarAlojamientos = async () => parseIdYFotos(await getAlojamientosFiltrados())
+    const cargarAlojamientos = async () => cargaInicial()
     cargarAlojamientos()
   }, [])
 
   const contextValue = {
     alojamientos,
     setAlojamientos,
-    findAlojamientoById
+    findAlojamientoById,
+    errorAlojamientos,
+    setErrorAlojamientos
   }
 
 

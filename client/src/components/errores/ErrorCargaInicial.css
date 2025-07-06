@@ -1,0 +1,20 @@
+.titulo-error-inicial {
+    font-size: 40px;
+    
+}
+
+.mensaje-error-inicial {
+    font-size: 4vw;
+
+}
+
+.error-inicial {
+    padding-left: 1em;
+    color: var(--color-error);
+}
+
+.imagen-desconexion {
+    width: auto;
+    color: aqua;
+    height: 50vh;
+}

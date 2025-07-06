@@ -15,13 +15,13 @@ function Footer() {
             <p>© {new Date().getFullYear()} Birbnb, Inc.</p>
         </div>
         <div className="footer-right">
-            <Select defaultValue="Español (AR)" indicator="" startDecorator={<LanguageIcon/>} variant="standard" disableUnderline="true" className='language-select' >
+            <Select defaultValue="Español (AR)" indicator="" startDecorator={<LanguageIcon/>} variant="standard" disableunderline="true" className='language-select' >
                 <Option value="Español (AR)" >Español (AR)</Option>
                 <Option value="English (US)">English (US)</Option>
                 <Option value="Français (FR)">Français (FR)</Option>
                 <Option value="Italiano (IT)">Italiano (IT)</Option>
             </Select>        
-            <Select defaultValue="$ ARS" indicator="" variant="standard" disableUnderline="true" className="coin-select" >
+            <Select defaultValue="$ ARS" indicator="" variant="standard" disableunderline="true" className="coin-select" >
                 <Option value="$ ARS">$ ARS</Option>
                 <Option value="$ USD">$ USD</Option>
                 <Option value="€ EUR">€ EUR</Option>
