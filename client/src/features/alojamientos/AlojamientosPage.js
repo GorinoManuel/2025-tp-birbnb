@@ -18,7 +18,11 @@ export const Alojamientos = () => {
     const [errorPropio, setErrorPropio] = useState(undefined)
     const [page, setPage] = useState(0);
     const [limit, setLimit] = useState(10);
-
+    const [open, setOpen] = useState(true)
+    
+        const alCerrar = () => {
+            setOpen(false)
+        }
 
 
 
@@ -36,14 +40,14 @@ export const Alojamientos = () => {
         } catch(error) {
             mostrarError(error.message)
             setErrorPropio(error.message)
+            setOpen(true)
         }
     }
 
     const gestionarBusquedaAlojamientos = () => {
         console.log("Hay errores : " + errorAlojamientos)
         if(errorPropio) {
-            console.log("Porqué entra? : " + errorPropio)
-            return <h5>Hay error</h5> // <Error nombreError={'Algun nombre'} mensajeDeError={errorPropio} />
+            return <Error nombreError={'Algun nombre'} mensajeDeError={errorPropio} open={open} alCerrar={alCerrar} />
         }
         return alojamientos.length  !== 0 ? <Carousel subtitulo={"Tus Alojamientos Recomendados"}></Carousel> : <h3 className="sin-alojamientos">No se encontraron los alojamientos filtrados</h3> 
     }

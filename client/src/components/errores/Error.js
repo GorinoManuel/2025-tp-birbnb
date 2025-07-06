@@ -1,18 +1,11 @@
-import Modal from '@mui/material/Modal';
-import { useState } from "react"
+import { Dialog, DialogTitle } from '@mui/material';
 
 
-export const Error = ({nombreError, mensajeDeError}) => {
-    const [open, setOpen] = useState(false)
-
-    const alCerrar = () => {
-        setOpen(false)
-    }
-
+export const Error = ({nombreError, mensajeDeError, open, alCerrar}) => {
     return <div>
-        <Modal  aria-labelledby="titulo-error"  aria-describedby="" open={open} onClose={alCerrar}>
-            <h5 id="titulo-error" >Oh, se produjo un error!</h5>
-            <p id="mensaje-error" >{nombreError}: {mensajeDeError}</p>
-        </Modal>
+        <Dialog  aria-labelledby="titulo-error"  aria-describedby="" open={open} onClose={alCerrar} className='dialogo-error'>
+            <h5 id="titulo-error">Oh, se produjo un error!</h5>
+            <p id="mensaje-error">{nombreError}: {mensajeDeError}</p>
+        </Dialog>
     </div>
 }

@@ -1,0 +1,13 @@
+#titulo-error {
+    color: var(--color-error);
+}
+
+#mensaje-error {
+    color: var(--color-error);
+}
+
+.dialogo-error {
+    height: 100px;
+    width: 300px;
+    color: var(--color-error);
+}
