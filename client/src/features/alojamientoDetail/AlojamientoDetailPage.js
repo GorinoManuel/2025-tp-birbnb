@@ -65,7 +65,7 @@ const AlojamientoDetailLoaded = ({alojamientoDetallado, fillFotos}) => {
                     <form>
                         <FormControl className='separador-inputs'>
                             <InputLabel htmlFor='cant-huespedes'>Cantidad de Huespedes</InputLabel>
-                            <Input type='number' aria-label='Cantidad de huespedes' id='cant-huespedes' required/>
+                            <Input type='number' aria-label='Cantidad de huespedes' id='cant-huespedes' name='Cantidad de huespedes' required/>
                         </FormControl>
                         <FormControl className='separador-inputs'>
                             <TextField type='date' label='Fecha de Inicio' defaultValue={new Date().toISOString().split('T')[0]} aria-label='Fecha de Inicio' id='fecha-inicio' name='fecha-inicio' required/>

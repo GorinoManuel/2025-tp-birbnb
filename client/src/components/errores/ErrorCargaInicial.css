@@ -4,17 +4,43 @@
 }
 
 .mensaje-error-inicial {
-    font-size: 4vw;
+    font-size: 40px;
 
 }
 
-.error-inicial {
-    padding-left: 1em;
+.error-inicial .MuiPaper-root {
     color: var(--color-error);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+
+    h3, p {
+        margin-block-start: 10px;
+        margin-block-end: 10px;
+    }
+
+
 }
 
 .imagen-desconexion {
+    margin-top: 10px;
     width: auto;
-    color: aqua;
     height: 50vh;
+    filter: invert(22%) sepia(41%) saturate(5761%) hue-rotate(325deg) brightness(90%) contrast(94%) opacity(80%);
+}
+
+.error-inicial .boton-reintentar {
+    margin-top: 3em;
+    text-transform: capitalize;
+    color: var(--color-violeta-oscuro);
+    font-size: 30px;
+
+    svg {
+        font-size: 30px;
+    }
+
+    span {
+        padding-left: 5px;
+    }
 }

@@ -39,6 +39,7 @@ export const AlojamientosProvider = ({children}) => {
     try {
       const alojamientos = await getAlojamientos()
       parseIdYFotos(alojamientos)
+      setErrorAlojamientos(undefined)
     } catch (error) {
       setErrorAlojamientos(error.message)
       await new Promise((resolve) => { setTimeout(() => {}, 5000) })
@@ -55,7 +56,8 @@ export const AlojamientosProvider = ({children}) => {
     setAlojamientos,
     findAlojamientoById,
     errorAlojamientos,
-    setErrorAlojamientos
+    setErrorAlojamientos,
+    cargaInicial
   }
 
 

@@ -46,7 +46,6 @@ export const Alojamientos = () => {
     }
 
     const gestionarBusquedaAlojamientos = () => {
-        console.log("Hay errores : " + errorAlojamientos)
         if(errorPropio) {
             return <Error nombreError={'Algun nombre'} mensajeDeError={errorPropio} open={open} alCerrar={alCerrar} />
         }

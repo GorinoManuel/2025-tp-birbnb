@@ -16,16 +16,16 @@ const BirbnbCard = ({alojamiento}) => {
     }
 
     return(
-        <Card class= 'cardAlojamiento' color="primary" variant='outlined' sx={{ width: 320, maxWidth: '100%', boxShadow: 'lg' }} onClick={() => alVerMas(alojamiento)} >
-            <div class="cardHeader">
-                <content>
-                    <h3 class="nombre">{alojamiento.nombre}</h3> 
-                    <p class="anfitrion">Anfitrión: {alojamiento.anfitrion}</p>
-                </content>
+        <Card className= 'cardAlojamiento' color="primary" variant='outlined' sx={{ width: 320, maxWidth: '100%', boxShadow: 'lg' }} onClick={() => alVerMas(alojamiento)} >
+            <div className="cardHeader">
+                <section>
+                    <h3 className="nombre">{alojamiento.nombre}</h3> 
+                    <p className="anfitrion">Anfitrión: {alojamiento.anfitrion}</p>
+                </section>
             </div>
             <CardOverflow sx={{width: '100%'}}>
                 <AspectRatio sx={{ minWidth: 200, width:'100%'}}>
-                <img class="imagenAlojamiento"
+                <img className="imagenAlojamiento"
                     src={ alojamiento.fotos[0].path}
                     srcSet=""
                     loading="lazy"
@@ -33,18 +33,18 @@ const BirbnbCard = ({alojamiento}) => {
                 />
                 </AspectRatio>
             </CardOverflow>
-            <div class="cardDescripcion">
-                <div class="cardText"> 
-                    <div class="ubicacion">
+            <div className="cardDescripcion">
+                <div className="cardText"> 
+                    <div className="ubicacion">
                         <p><PublicIcon className='icono-mundo-card'/>{alojamiento.direccion.ciudad}, {alojamiento.direccion.pais}</p>    
                     </div>
-                    <div class="detalles">
+                    <div className="detalles">
                         <p>Hasta {alojamiento.cantHuespedesMax} personas</p>
                         <p>${alojamiento.precioPorNoche} por noche</p>
                         <ChipBoxCaracteristicas caracteristicas={alojamiento.caracteristicas} />
                     </div>
                 </div>
-                <div class="cardButton">   
+                <div className="cardButton">   
                     <CardOverflow>
                         <Button variant="contained" color="primary" size="md" onClick={() => alVerMas(alojamiento)}>
                             ver mas +
@@ -59,7 +59,7 @@ const BirbnbCard = ({alojamiento}) => {
 export const CardList = ({alojamientos}) => {
 
     return(
-        <div class="cardlist">{
+        <div className="cardlist">{
             alojamientos.map((alojamiento) => 
                 <BirbnbCard alojamiento={alojamiento} key={alojamiento.idFront}>
                 </BirbnbCard>

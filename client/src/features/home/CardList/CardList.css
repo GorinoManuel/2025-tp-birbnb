@@ -22,7 +22,7 @@
     margin: 16px 12px;
 }
 
-.cardHeader > content{
+.cardHeader > section{
     display: flex;
     flex-direction: column;
     gap: 16px;
