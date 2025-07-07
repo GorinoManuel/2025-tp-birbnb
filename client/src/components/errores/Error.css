@@ -6,8 +6,6 @@
     color: var(--color-error);
 }
 
-.dialogo-error {
-    height: 100px;
-    width: 300px;
+.dialogo-error .MuiDialog-container  {
     color: var(--color-error);
 }

@@ -14,7 +14,7 @@ const mapperErroresAlojamiento = (codigo_de_estado) => {
 }
 
 export const Alojamientos = () => {
-    const {setAlojamientos, alojamientos, errorAlojamientos, setErrorAlojamientos} = useContext(AlojamientosContext); 
+    const {setAlojamientos, alojamientos, errorAlojamientos} = useContext(AlojamientosContext); 
     const [errorPropio, setErrorPropio] = useState(undefined)
     const [page, setPage] = useState(0);
     const [limit, setLimit] = useState(10);
@@ -36,9 +36,10 @@ export const Alojamientos = () => {
             console.log(datosObtenidos)
             setAlojamientos( datosObtenidos.alojamientos )
             setLimit(datosObtenidos.limite)
-            setPage(datosObtenidos.pagina) 
+            setPage(datosObtenidos.pagina)
+            setErrorPropio(undefined) 
         } catch(error) {
-            mostrarError(error.message)
+            mostrarError(error)
             setErrorPropio(error.message)
             setOpen(true)
         }

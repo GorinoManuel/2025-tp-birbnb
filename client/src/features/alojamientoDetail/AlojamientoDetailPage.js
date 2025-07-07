@@ -36,22 +36,22 @@ const AlojamientoDetailLoaded = ({alojamientoDetallado, fillFotos}) => {
     
     return(
         <>
-        <div class="body">
-            <div class="image">
-                <div class="leftButton">
+        <div className="body">
+            <div className="image">
+                <div className="leftButton" title='boton imagen anterior'>
                     <Button onClick={() => handleLeft()}>
                         <ArrowBackIosIcon></ArrowBackIosIcon>
                     </Button>
                 </div>
                     <img src={showedFoto.fotos[showedFoto.indice].path} alt={`Alojamiento con ${alojamientoDetallado.id} y nombre ${alojamientoDetallado.nombre}`}></img>
-                <div class="rightButton">
+                <div className="rightButton" title='boton imagen posterior'>
                     <Button onClick={() => handleRight()}>
                         <ArrowForwardIosIcon></ArrowForwardIosIcon>
                     </Button>
                 </div>
             </div>
-            <div class="image-footer">
-                <div class="description">
+            <div className="image-footer">
+                <div className="description">
                     <ChipBoxCaracteristicas caracteristicas={alojamientoDetallado.caracteristicas}/>
                     <h1>{alojamientoDetallado.nombre}</h1>
                     <p>{alojamientoDetallado.descripcion}</p>
@@ -61,16 +61,16 @@ const AlojamientoDetailLoaded = ({alojamientoDetallado, fillFotos}) => {
                     <p>Horario de Check Out: {alojamientoDetallado.horarioCheckOut}</p>
                     <p>Hasta {alojamientoDetallado.cantHuespedesMax} huesped/es</p>
                 </div>
-                <div class="buying-section">
+                <div className="buying-section">
                     <form>
-                        <FormControl>
+                        <FormControl className='separador-inputs'>
                             <InputLabel htmlFor='cant-huespedes'>Cantidad de Huespedes</InputLabel>
-                            <Input type='number' aria-label='Cantidad de huespedes' id='cant-huespedes' />
+                            <Input type='number' aria-label='Cantidad de huespedes' id='cant-huespedes' required/>
                         </FormControl>
-                        <FormControl>
+                        <FormControl className='separador-inputs'>
                             <TextField type='date' label='Fecha de Inicio' defaultValue={new Date().toISOString().split('T')[0]} aria-label='Fecha de Inicio' id='fecha-inicio' name='fecha-inicio' required/>
                         </FormControl>
-                        <FormControl>
+                        <FormControl className='separador-inputs'>
                             <TextField type='date' label='Fecha de Finalización' defaultValue={fechaFinal()} aria-label='Fecha de Finalizacion' id='fecha-fin' name='fecha-fin' required/>
                         </FormControl>
                             <Button variant='contained' className='boton-reservar'>Reservar</Button>

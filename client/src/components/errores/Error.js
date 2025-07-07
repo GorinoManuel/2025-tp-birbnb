@@ -1,11 +1,13 @@
-import { Dialog, DialogTitle } from '@mui/material';
-
+import { Dialog, DialogContent, DialogTitle } from '@mui/material';
+import "./Error.css"
 
 export const Error = ({nombreError, mensajeDeError, open, alCerrar}) => {
     return <div>
-        <Dialog  aria-labelledby="titulo-error"  aria-describedby="" open={open} onClose={alCerrar} className='dialogo-error'>
-            <h5 id="titulo-error">Oh, se produjo un error!</h5>
-            <p id="mensaje-error">{nombreError}: {mensajeDeError}</p>
+        <Dialog  aria-labelledby="titulo-error"  aria-describedby="" open={open} onClose={alCerrar} className='dialogo-error' fullWidth={true} maxWidth="sm">
+            <DialogTitle id="titulo-error">Oh, se produjo un error!</DialogTitle>
+            <DialogContent>
+                 <p id="mensaje-error">{nombreError}: {mensajeDeError}</p>
+            </DialogContent>
         </Dialog>
     </div>
 }

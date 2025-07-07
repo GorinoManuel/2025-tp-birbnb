@@ -9,12 +9,26 @@ import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNone
 import Button from '@mui/material/Button';
 import './NavBar.css'
 import { useNavigate } from 'react-router';
+import { Menu } from '@mui/material';
+import { useState } from 'react';
+import MenuIcon from '@mui/icons-material/Menu';
 
 const pages = ['Alojamientos', 'Reservas'];
 
+const anchoPantalla = window.innerWidth
+
 export default function NavBar() {
   const navigate = useNavigate();
+  const [anchorEl, setAnchorEl] = useState(null)
+  const open = Boolean(anchorEl)
+  const handleClose = () => {
+        setAnchorEl(null)
+   }
 
+
+  const clikearBoton = (elementoSeleccionado) => {
+        setAnchorEl(elementoSeleccionado)
+    } 
   return (
       <AppBar position="static">
         <Toolbar className="toolbar" >
@@ -25,11 +39,35 @@ export default function NavBar() {
             </h4>
           </div>
           <div  className="appbar-buttons" >
-            {pages.map((page) => (
+            {
+            
+            anchoPantalla > 600 ?
+            
+            pages.map((page) => (
               <Button key={page} id="button" onClick={()=>navigate(`/${page.toLowerCase()}`)}>
                 {page}
               </Button>
-            ))}
+            )) : 
+            <>
+            <Button key='abrir-menu-header' 
+             aria-controls={open ? 'button-menu' : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? 'true' : undefined}
+            onClick={(e) => clikearBoton(e.currentTarget)} >
+              <MenuIcon/>
+            </Button>
+              <Menu
+                  open={open}
+                  onClose={handleClose}
+                  >
+              {pages.map((page) => (
+                <Button key={page} id="button" onClick={()=>navigate(`/${page.toLowerCase()}`)}>
+                  {page}
+                </Button>
+                ))}
+            </Menu>
+            </>
+          }
           </div>
           <div className="appbar-icons" >
             <IconButton size="large" aria-label="home" color="black" id="appbar-icon" >
