@@ -6,16 +6,16 @@ export const FiltrosInput = ({ parametros, modificarInput}) => {
 
     return (
         <>
-            {parametros.map(parametro =>  <Input nombre={parametro.nombreParam} modificarInput={modificarInput} input={parametro.input} key={parametro.nombreParam}/>)}
+            {parametros.map(parametro =>  <Input nombre={parametro.nombreParam} nombreLabel={parametro.nombreLabel} modificarInput={modificarInput} input={parametro.input} key={parametro.nombreParam}/>)}
         </>
     )
 }
 
-const Input = ({ nombre, modificarInput, input }) => {
+const Input = ({ nombre, modificarInput, input, nombreLabel }) => {
     return (
         <div key={nombre} className="input">
              <TextField
-                label={nombre}
+                label={nombreLabel}
                 variant="outlined"
                 onChange={(e) => modificarInput(e.target.value, nombre)}
                 value={input}
