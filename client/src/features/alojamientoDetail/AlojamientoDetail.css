@@ -55,7 +55,7 @@
 }
 
 .buying-section {
-    width: 35%;
+    width: 30%;
 }
 
 .buying-section > form {
@@ -91,8 +91,17 @@
     }
 }
 
-@media(max-width: 600px) {
+
+
+
+@media(max-width: 780px) {
     .image-footer {
-        flex-direction: column-reverse;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .buying-section {
+        width: 50%;
+        height: 50vh;
     }
 }

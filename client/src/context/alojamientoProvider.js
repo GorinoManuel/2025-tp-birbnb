@@ -42,7 +42,6 @@ export const AlojamientosProvider = ({children}) => {
       setErrorAlojamientos(undefined)
     } catch (error) {
       setErrorAlojamientos(error.message)
-      await new Promise((resolve) => { setTimeout(() => {}, 5000) })
     }
   } 
 

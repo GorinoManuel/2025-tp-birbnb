@@ -8,18 +8,75 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { useParams } from 'react-router';
 import LinearProgress from '@mui/material/LinearProgress';
 import { ChipBoxCaracteristicas } from '../../components/chipBoxCaracteristicas/ChipBoxCaracteristicas';
+import { huespedID } from '../../mockData/user';
+import { hacerReserva } from '../../api/reservasAPI';
+
+ const fechaFinal = () => {
+        var fecha = new Date()
+        fecha.setDate(fecha.getDate() + 5)
+        return fecha.toISOString().split('T')[0]
+    }
+
+const inicializarCampos = () => {
+    return { fechaInicio: {valor: new Date().toISOString().split('T')[0]}, fechaFinal: {valor: fechaFinal()}, cantHuespedes: {valor: 1}}
+}
+
+const Formulario = ()=> {
+    const [campos, setCampos] = useState(inicializarCampos())
+    
+    const valorDe = (nombreCampo) => campos[nombreCampo].valor
+
+  const setValorDe = (nombreCampo) => (e) => {
+    const nuevoValor = e.target.value
+    setCampos({
+      ...campos,
+      [nombreCampo]: {
+        ...campos[nombreCampo],
+        valor: nuevoValor
+      }
+    })
+  }
+
+
+    return <form onSubmit={(e) => e.preventDefault()}>
+                <FormControl className='separador-inputs'>
+                    <InputLabel htmlFor='cant-huespedes'>Cantidad de Huespedes</InputLabel>
+                    <Input type='number' aria-label='Cantidad de huespedes' id='cant-huespedes' name='Cantidad de huespedes' required
+                    value={valorDe('cantHuespedes')} onChange={setValorDe('cantHuespedes')} inputProps={({'min':'1'})}/>
+                </FormControl>
+                <FormControl className='separador-inputs'>
+                    <TextField type='date' label='Fecha de Inicio'  aria-label='Fecha de Inicio' id='fecha-inicio' name='fecha-inicio' required 
+                    value={valorDe('fechaInicio')} onChange={setValorDe('fechaInicio')}/>
+                </FormControl>
+                <FormControl className='separador-inputs'>
+                    <TextField type='date' label='Fecha de Finalización' defaultValue={fechaFinal()} aria-label='Fecha de Finalizacion' id='fecha-fin' name='fecha-fin' required
+                    alue={valorDe('fechaFinal')} onChange={setValorDe('fechaFinal')}/>
+                </FormControl>
+                    <Button variant='contained' className='boton-reservar'>Reservar</Button>
+            </form>
+} 
+
 
 const AlojamientoDetailLoaded = ({alojamientoDetallado, fillFotos}) => {
     
     const [showedFoto, setShowed] = useState(fillFotos(alojamientoDetallado))
-
+    const [errorReserva, setErrorReserva] = useState(undefined)
     const handleLeft = () => {
         setShowed(prev => {
             const nuevoIndice = prev.indice === 0 ? prev.indice : prev.indice - 1
             return { ...prev, indice: nuevoIndice};
         });
     }
+    const crearReserva = async (datosReserva) => {
+        try {
+           datosReserva.huespedReservador = huespedID
+           const reservaNueva = await hacerReserva(datosReserva)
 
+        }catch (error) {
+            setErrorReserva(error)
+
+        }
+    }
     
     const handleRight = () => {
         setShowed(prev => {
@@ -28,11 +85,7 @@ const AlojamientoDetailLoaded = ({alojamientoDetallado, fillFotos}) => {
         });
     }
 
-    const fechaFinal = () => {
-        var fecha = new Date()
-        fecha.setDate(fecha.getDate() + 5)
-        return fecha.toISOString().split('T')[0]
-    }
+    
     
     return(
         <>
@@ -62,26 +115,14 @@ const AlojamientoDetailLoaded = ({alojamientoDetallado, fillFotos}) => {
                     <p>Hasta {alojamientoDetallado.cantHuespedesMax} huesped/es</p>
                 </div>
                 <div className="buying-section">
-                    <form>
-                        <FormControl className='separador-inputs'>
-                            <InputLabel htmlFor='cant-huespedes'>Cantidad de Huespedes</InputLabel>
-                            <Input type='number' aria-label='Cantidad de huespedes' id='cant-huespedes' name='Cantidad de huespedes' required/>
-                        </FormControl>
-                        <FormControl className='separador-inputs'>
-                            <TextField type='date' label='Fecha de Inicio' defaultValue={new Date().toISOString().split('T')[0]} aria-label='Fecha de Inicio' id='fecha-inicio' name='fecha-inicio' required/>
-                        </FormControl>
-                        <FormControl className='separador-inputs'>
-                            <TextField type='date' label='Fecha de Finalización' defaultValue={fechaFinal()} aria-label='Fecha de Finalizacion' id='fecha-fin' name='fecha-fin' required/>
-                        </FormControl>
-                            <Button variant='contained' className='boton-reservar'>Reservar</Button>
-                    </form>
-                    
+                    <Formulario/>
                 </div>
             </div>
         </div>
         </>  
     )
 }
+
 
 export const AlojamientoDetail = () => {
     

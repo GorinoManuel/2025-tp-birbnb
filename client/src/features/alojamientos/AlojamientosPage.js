@@ -9,12 +9,9 @@ import {Pagination, Input} from "@mui/material"
 import { Error } from "../../components/errores/Error"
 
 
-const mapperErroresAlojamiento = (codigo_de_estado) => {
-
-}
 
 export const Alojamientos = () => {
-    const {setAlojamientos, alojamientos, errorAlojamientos} = useContext(AlojamientosContext); 
+    const {setAlojamientos, alojamientos} = useContext(AlojamientosContext); 
     const [errorPropio, setErrorPropio] = useState(undefined)
     const [page, setPage] = useState(0);
     const [limit, setLimit] = useState(10);

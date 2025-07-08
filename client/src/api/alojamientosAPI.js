@@ -2,7 +2,8 @@ import axios from "axios"
 import qs from "qs"
 
 export const getAlojamientos = async () => {
-    return axios.get(`http://localhost:4000/alojamientos`).then(r => r.data.resultados)
+    console.log(process.env.SERVER_URL)
+    return axios.get(`${process.env.SERVER_URL}/alojamientos`).then(r => r.data.resultados)
 }
 
 export const getAlojamientosFiltrados = async (filtros) => {

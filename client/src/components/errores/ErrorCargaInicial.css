@@ -26,7 +26,7 @@
 .imagen-desconexion {
     margin-top: 10px;
     width: auto;
-    height: 50vh;
+    height: 40vh;
     filter: invert(22%) sepia(41%) saturate(5761%) hue-rotate(325deg) brightness(90%) contrast(94%) opacity(80%);
 }
 
@@ -42,5 +42,22 @@
 
     span {
         padding-left: 5px;
+    }
+}
+
+@media(max-width: 700px) {
+    .imagen-desconexion {
+        margin-top: 100px;
+        height: 35vh;
+    }
+
+    .titulo-error-inicial {
+        font-size: 30px;
+    
+    }
+
+    .mensaje-error-inicial {
+        font-size: 30px;
+
     }
 }

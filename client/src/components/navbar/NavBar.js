@@ -50,7 +50,7 @@ export default function NavBar() {
             )) : 
             <>
             <Button key='abrir-menu-header' 
-             aria-controls={open ? 'button-menu' : undefined}
+             aria-controls={open ? 'menu-navbar' : undefined}
                 aria-haspopup="true"
                 aria-expanded={open ? 'true' : undefined}
             onClick={(e) => clikearBoton(e.currentTarget)} >
@@ -59,6 +59,8 @@ export default function NavBar() {
               <Menu
                   open={open}
                   onClose={handleClose}
+                  anchorEl={anchorEl}
+                  id='menu-navbar'
                   >
               {pages.map((page) => (
                 <Button key={page} id="button" onClick={()=>navigate(`/${page.toLowerCase()}`)}>
