@@ -57,8 +57,7 @@ export class ReservaService {
         const reservaGuardada = await this.reservaRepository.crearReserva(reservaNueva)
 
         alojamiento.agregarReserva(reservaGuardada)
-        this.alojamientoRepository.actualizarAlojamiento(alojamiento)
-        
+        this.alojamientoRepository.actualizarAlojamiento(alojamiento)       
         const notificacion = FactoryNotificacion.crearSegunReserva(reservaNueva)
         this.notificacionRepository.guardarNotificacion(notificacion);
         return reservaGuardada

@@ -113,6 +113,24 @@
 }
 
 
+#mensaje-reserva-concretada {
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 30px;
+}
+
+#titulo-reserva-concretada {
+    color: black;
+    font-size: 35px;
+}
+
+.dialogo-reserva-concretada .MuiDialog-container  {
+    font-size: 35px;
+    .icono-check {
+        color: green;
+        padding-left: 5px;
+    }
+}
+
 
 
 @media(max-width: 780px) {

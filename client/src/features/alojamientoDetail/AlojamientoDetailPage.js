@@ -12,6 +12,7 @@ import { ChipBoxCaracteristicas } from '../../components/chipBoxCaracteristicas/
 import { huespedID } from '../../mockData/user';
 import { hacerReserva } from '../../api/reservasAPI';
 import { Error } from '../../components/errores/Error';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
  const fechaFinal = () => {
         var fecha = new Date()
@@ -41,9 +42,21 @@ const Formulario = ({crearReserva, maxHuespedes})=> {
   const revisarValores = () => {
     const fechaInicioArevisar = new Date(campos.fechaInicio.valor)
     const fechaFinalARevisar = new Date(campos.fechaFinal.valor)
-    if(fechaInicioArevisar < fechaFinalARevisar) {
+    
+    if(fechaInicioArevisar < fechaFinalARevisar  && esMayorOIgualAFechaActual(fechaInicioArevisar)) {
         crearReserva({fechaInicio: campos.fechaInicio.valor, fechaFin: campos.fechaFinal.valor, cantHuespedes: campos.cantHuespedes.valor})
+    } else {
+
     }
+  }
+
+  const esMayorOIgualAFechaActual = (fechaInicioArevisar) => {
+        const fechaActual = new Date()
+        return fechaActual.getFullYear() <= fechaInicioArevisar.getFullYear() 
+                || (fechaActual.getFullYear() === fechaInicioArevisar.getFullYear() && 
+                fechaActual.getMonth() <= fechaInicioArevisar.getMonth()) || 
+                (fechaActual.getFullYear() === fechaInicioArevisar.getFullYear() && 
+                fechaActual.getMonth() === fechaInicioArevisar.getMonth() && fechaActual.getDay <= fechaInicioArevisar.getDay())
   }
 
     return <form onSubmit={(e) => e.preventDefault()}>
@@ -74,6 +87,8 @@ const AlojamientoDetailLoaded = ({alojamientoDetallado, fillFotos}) => {
     
         const alCerrar = () => {
             setOpen(false)
+            setErrorReserva(undefined)
+            setReserva(undefined)
         }
     const handleLeft = () => {
         setShowed(prev => {
@@ -92,6 +107,7 @@ const AlojamientoDetailLoaded = ({alojamientoDetallado, fillFotos}) => {
             setErrorReserva(error)
             console.error(error)
         }
+        setOpen(true)
     }
     
     const handleRight = () => {
@@ -134,12 +150,19 @@ const AlojamientoDetailLoaded = ({alojamientoDetallado, fillFotos}) => {
                     <Formulario maxHuespedes={alojamientoDetallado.cantHuespedesMax} crearReserva={crearReserva}/>
                 </div>
             </div>
-            {reserva ? <Dialog  aria-labelledby="titulo-error"  aria-describedby="mensaje-error" open={open} onClose={alCerrar} className='dialogo-error' fullWidth={true} >
-            <DialogTitle id="titulo-error">Se ha concretado su reserva!</DialogTitle>
+            {reserva ? <Dialog  aria-labelledby="titulo-reserva-concretada"  aria-describedby="mensaje-reserva-concretada" open={open} onClose={alCerrar} className='dialogo-reserva-concretada' fullWidth={true} >
+            <DialogTitle id="titulo-reserva-concretada">Se ha concretado su reserva!<CheckCircleIcon className='icono-check'/></DialogTitle>
             <DialogContent>
-                 <p id="mensaje-error">Reserva: {reserva.id}</p>
+                 <p id="mensaje-reserva-concretada">Reserva: {reserva.id}</p>
+                 <p id="mensaje-reserva-concretada">Huesped Reservador: {reserva.huespedReservador}</p>
+                 <p id="mensaje-reserva-concretada">Cantidad de huespedes: {reserva.cantHuespedes}</p>
+                 <p id="mensaje-reserva-concretada">Alojamiento: {reserva.alojamiento}</p>
+                 <p id="mensaje-reserva-concretada">Fecha de Inicio: {reserva.fechaInicio}</p>
+                 <p id="mensaje-reserva-concretada">Fecha de Finalizacion: {reserva.fechaFin}</p>
+                 <p id="mensaje-reserva-concretada">Precio Por Noche: {reserva.precioPorNoche}</p>
+                 <p id="mensaje-reserva-concretada">Estado: {reserva.estado}</p>
             </DialogContent>
-        </Dialog> : (errorReserva ? <Error open={open} alCerrar={alCerrar} mensajeDeError={errorReserva.response.data.error} nombreError={errorReserva.response.data.error}/> : <></>)}
+        </Dialog> : (errorReserva ? <Error open={open} alCerrar={alCerrar} mensajeDeError={errorReserva.response.data ? errorReserva.response.data.error : "Servidor Desconectado" } nombreError={'El error es'}/> : <></>)}
         </div>
         </>  
     )
