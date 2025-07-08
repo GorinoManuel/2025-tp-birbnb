@@ -141,7 +141,7 @@ const AlojamientoDetailLoaded = ({alojamientoDetallado, fillFotos}) => {
                     <h1>{alojamientoDetallado.nombre}</h1>
                     <p>{alojamientoDetallado.descripcion}</p>
                     <p>Dirección: {alojamientoDetallado.direccion.calle} {alojamientoDetallado.direccion.altura}, {alojamientoDetallado.direccion.ciudad}, {alojamientoDetallado.direccion.pais}</p>
-                    <p>Precio por noche: {alojamientoDetallado.precioPorNoche} {alojamientoDetallado.moneda}</p>
+                    <p>Precio por noche: ${alojamientoDetallado.precioPorNoche} </p>
                     <p>Horario de Check In: {alojamientoDetallado.horarioCheckIn}</p>
                     <p>Horario de Check Out: {alojamientoDetallado.horarioCheckOut}</p>
                     <p>Hasta {alojamientoDetallado.cantHuespedesMax} huesped/es</p>

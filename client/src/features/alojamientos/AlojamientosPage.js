@@ -66,10 +66,10 @@ export const Alojamientos = () => {
                 <BarraDeBusqueda alBuscarAlojamientos={alBuscarAlojamientos}/>
             </header>
              {gestionarBusquedaAlojamientos()} 
-            <div className="paginacion">
+            {/*<div className="paginacion">
                 <Input  type="number" inputProps={({ 'min': '0', 'step': '10'})} name="limiteDeElementos" value={limit} />
                 <Pagination count={totalPages} variant="outlined" page={page} siblingCount={1} onChange={handleChange}/>
-            </div>
+            </div>*/}
         </section>
     )
 }
