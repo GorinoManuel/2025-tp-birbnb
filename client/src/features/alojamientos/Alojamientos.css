@@ -1,7 +1,7 @@
 .cabecera-alojamientos {
     display: flex;
     justify-content: center;
-    margin-top: 2em;
+    margin: 2em 2em 0em 2em;
 }
 
 .sin-alojamientos {

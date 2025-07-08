@@ -2,10 +2,13 @@
 .cardlist{
   display: flex;
   flex-direction: row; 
-  gap: 24px;
+  gap: 3em;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .cardAlojamiento {
+    width: 20em; 
     background-color: #FEF7FF;
     border-radius: 2%;
     border: 1px solid #e0e0e0;
@@ -21,7 +24,11 @@
 .cardHeader {
     margin: 16px 12px;
 }
-
+.cardHeader > content{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
 .cardHeader > section{
     display: flex;
     flex-direction: column;
