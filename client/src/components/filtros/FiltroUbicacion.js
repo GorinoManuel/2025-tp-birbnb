@@ -5,7 +5,7 @@ import { Filtro } from "./Filtros"
 
 
 export const FiltroUbicacion = ({modificarFiltros, nombrePais, nombreCiudad}) => {
-    const [parametros, setParametros] = useState([{nombreParam: nombrePais, input: ""}, {nombreParam: nombreCiudad, input: ""}]) 
+    const [parametros, setParametros] = useState([{nombreParam: nombrePais, input: "", nombreLabel: "País"}, {nombreParam: nombreCiudad, input: "", nombreLabel:"Ciudad"}]) 
     
     const guardarFiltros = () => {
         const filtros = parametros.map(param => ({nombre: param.nombreParam, valor: param.input}))
