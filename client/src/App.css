@@ -4,6 +4,7 @@
   --color-violeta-claro: #C922B0;
   --color-violeta-oscuro: #8F22C9;
   --color-principal-cta-hover: hsl(339, 71%, 38%);
+  --color-error: hsl(339, 75%, 50%);
 }
 
 body {
