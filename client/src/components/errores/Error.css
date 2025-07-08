@@ -1,0 +1,18 @@
+#titulo-error {
+    color: var(--color-error);
+    font-size: 35px;
+}
+
+#mensaje-error {
+    color: var(--color-error);
+    font-size: 30px;
+}
+
+.dialogo-error .MuiDialog-container  {
+    color: var(--color-error);
+    .icono-error {
+        padding-left: 5px;
+        color: var(--color-principal-cta);
+        font-size: 35px;
+    }
+}

@@ -9,7 +9,7 @@ export const Carousel = ({subtitulo}) => {
     const {alojamientos} = useContext(AlojamientosContext); 
 
     return(
-        <div class="carousel">
+        <div className="carousel">
             <p className='subtitulo-carousel'>{subtitulo}</p>
             {alojamientos.length !== 0 ? <CardList alojamientos={alojamientos}></CardList> : <LinearProgress color="secondary" />}
         </div>

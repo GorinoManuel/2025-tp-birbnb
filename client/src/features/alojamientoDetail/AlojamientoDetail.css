@@ -1,14 +1,11 @@
 .body {
     display: flex;
     flex-direction: column;
-    width: 100vw;
     padding-bottom: 48px;
 }
 
 .image {
     display: flex;
-    width: 100vw;
-    border: 1px solid black;
     align-items: center;
     justify-content: center;
 }
@@ -19,6 +16,7 @@
   border-radius: 4px;
   padding: 5px;
   height: 40vw;
+  width: max-content;
   min-width: 20vw;
 }
 
@@ -56,13 +54,43 @@
     padding: 8px 12px;
 }
 
+.buying-section {
+    width: 30%;
+}
+
 .buying-section > form {
     display: flex;
     flex-direction: column;
-    width: fit-content;
-    padding: 5em;
+    justify-content: center;
+    padding: 1em;
+    height: 90%;
     border-radius: 25%;
     box-shadow:  0 4px 8px rgba(0, 0, 0, 0.4);
+
+    .separador-inputs {
+        margin-bottom: 1em;
+        color:var(--color-violeta-claro);
+
+        
+    }
+
+    .separador-inputs > .text-field-input > .Mui-focused  fieldset {
+        border-color: var(--color-violeta-claro);
+    }
+
+    .separador-inputs > .text-field-input > label.Mui-focused {
+        color: var(--color-violeta-claro);
+    }
+
+    .separador-inputs > label.Mui-focused {
+        color: var(--color-violeta-claro);
+    }
+
+
+    .separador-inputs > .Mui-focused.MuiInput-root::after {
+        border-bottom: 2px solid var(--color-violeta-claro);
+    }
+
 }
 
 .chips-box {
@@ -84,8 +112,35 @@
     }
 }
 
-@media(max-width: 600px) {
+
+#mensaje-reserva-concretada {
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 30px;
+}
+
+#titulo-reserva-concretada {
+    color: black;
+    font-size: 35px;
+}
+
+.dialogo-reserva-concretada .MuiDialog-container  {
+    font-size: 35px;
+    .icono-check {
+        color: green;
+        padding-left: 5px;
+    }
+}
+
+
+
+@media(max-width: 780px) {
     .image-footer {
-        flex-direction: column-reverse;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .buying-section {
+        width: 50%;
+        height: 50vh;
     }
 }

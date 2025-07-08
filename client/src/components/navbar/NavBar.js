@@ -1,4 +1,3 @@
-import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
@@ -9,8 +8,12 @@ import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNone
 import Button from '@mui/material/Button';
 import './NavBar.css'
 import { useNavigate } from 'react-router';
+import MenuIcon from '@mui/icons-material/Menu';
+import { MenuComun } from '../menuComun/MenuComun';
 
 const pages = ['Alojamientos', 'Reservas'];
+
+const anchoPantalla = window.innerWidth
 
 export default function NavBar() {
   const navigate = useNavigate();
@@ -25,11 +28,26 @@ export default function NavBar() {
             </h4>
           </div>
           <div  className="appbar-buttons" >
-            {pages.map((page) => (
+            {
+            
+            anchoPantalla > 600 ?
+            
+            pages.map((page) => (
               <Button key={page} id="button" onClick={()=>navigate(`/${page.toLowerCase()}`)}>
                 {page}
               </Button>
-            ))}
+            )) : 
+            <>
+              <MenuComun contenidoBoton={() => <MenuIcon/>} claseMenu={"menu-navbar"} claseBoton={"boton-menu-navbar"}>
+                {pages.map((page) => (
+                <Button key={page} id="button" onClick={()=>navigate(`/${page.toLowerCase()}`)}>
+                  {page}
+                </Button>
+                ))}
+              </MenuComun>
+              
+            </>
+          }
           </div>
           <div className="appbar-icons" >
             <IconButton size="large" aria-label="home" color="black" id="appbar-icon" >
