@@ -48,7 +48,6 @@ export class ReservaController {
                                   fechaFin: new Date(req.body.fechaFin)} 
             const idHuespedReservador = req.body.huespedReservador
             const cantHuespedes = req.body.cantHuespedes
-
             if(typeof cantHuespedes != 'number' || !isValidObjectId(idHuespedReservador) || !isValidObjectId(idAlojamiento)) {
                 throw new ValidacionInvalida('Los datos del huesped reservador, la cantidad de huespedes y el codigo del alojamiento son necesarios')
             }

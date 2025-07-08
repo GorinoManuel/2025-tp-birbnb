@@ -1,4 +1,3 @@
-import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
@@ -9,9 +8,8 @@ import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNone
 import Button from '@mui/material/Button';
 import './NavBar.css'
 import { useNavigate } from 'react-router';
-import { Menu } from '@mui/material';
-import { useState } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
+import { MenuComun } from '../menuComun/MenuComun';
 
 const pages = ['Alojamientos', 'Reservas'];
 
@@ -19,16 +17,7 @@ const anchoPantalla = window.innerWidth
 
 export default function NavBar() {
   const navigate = useNavigate();
-  const [anchorEl, setAnchorEl] = useState(null)
-  const open = Boolean(anchorEl)
-  const handleClose = () => {
-        setAnchorEl(null)
-   }
 
-
-  const clikearBoton = (elementoSeleccionado) => {
-        setAnchorEl(elementoSeleccionado)
-    } 
   return (
       <AppBar position="static">
         <Toolbar className="toolbar" >
@@ -49,25 +38,14 @@ export default function NavBar() {
               </Button>
             )) : 
             <>
-            <Button key='abrir-menu-header' 
-             aria-controls={open ? 'menu-navbar' : undefined}
-                aria-haspopup="true"
-                aria-expanded={open ? 'true' : undefined}
-            onClick={(e) => clikearBoton(e.currentTarget)} >
-              <MenuIcon/>
-            </Button>
-              <Menu
-                  open={open}
-                  onClose={handleClose}
-                  anchorEl={anchorEl}
-                  id='menu-navbar'
-                  >
-              {pages.map((page) => (
+              <MenuComun contenidoBoton={() => <MenuIcon/>} claseMenu={"menu-navbar"} claseBoton={"boton-menu-navbar"}>
+                {pages.map((page) => (
                 <Button key={page} id="button" onClick={()=>navigate(`/${page.toLowerCase()}`)}>
                   {page}
                 </Button>
                 ))}
-            </Menu>
+              </MenuComun>
+              
             </>
           }
           </div>

@@ -69,7 +69,28 @@
 
     .separador-inputs {
         margin-bottom: 1em;
+        color:var(--color-violeta-claro);
+
+        
     }
+
+    .separador-inputs > .text-field-input > .Mui-focused  fieldset {
+        border-color: var(--color-violeta-claro);
+    }
+
+    .separador-inputs > .text-field-input > label.Mui-focused {
+        color: var(--color-violeta-claro);
+    }
+
+    .separador-inputs > label.Mui-focused {
+        color: var(--color-violeta-claro);
+    }
+
+
+    .separador-inputs > .Mui-focused.MuiInput-root::after {
+        border-bottom: 2px solid var(--color-violeta-claro);
+    }
+
 }
 
 .chips-box {

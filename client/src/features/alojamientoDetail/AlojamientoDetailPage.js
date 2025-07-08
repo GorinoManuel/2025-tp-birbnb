@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { AlojamientosContext } from '../../context/alojamientoProvider';
 import "./AlojamientoDetail.css"
 import { Button, FormControl, Input, InputLabel, TextField} from '@mui/material';
+import { Dialog, DialogContent, DialogTitle } from '@mui/material';
 import { useState } from 'react';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -10,6 +11,7 @@ import LinearProgress from '@mui/material/LinearProgress';
 import { ChipBoxCaracteristicas } from '../../components/chipBoxCaracteristicas/ChipBoxCaracteristicas';
 import { huespedID } from '../../mockData/user';
 import { hacerReserva } from '../../api/reservasAPI';
+import { Error } from '../../components/errores/Error';
 
  const fechaFinal = () => {
         var fecha = new Date()
@@ -21,7 +23,7 @@ const inicializarCampos = () => {
     return { fechaInicio: {valor: new Date().toISOString().split('T')[0]}, fechaFinal: {valor: fechaFinal()}, cantHuespedes: {valor: 1}}
 }
 
-const Formulario = ()=> {
+const Formulario = ({crearReserva, maxHuespedes})=> {
     const [campos, setCampos] = useState(inicializarCampos())
     
     const valorDe = (nombreCampo) => campos[nombreCampo].valor
@@ -36,23 +38,29 @@ const Formulario = ()=> {
       }
     })
   }
-
+  const revisarValores = () => {
+    const fechaInicioArevisar = new Date(campos.fechaInicio.valor)
+    const fechaFinalARevisar = new Date(campos.fechaFinal.valor)
+    if(fechaInicioArevisar < fechaFinalARevisar) {
+        crearReserva({fechaInicio: campos.fechaInicio.valor, fechaFin: campos.fechaFinal.valor, cantHuespedes: campos.cantHuespedes.valor})
+    }
+  }
 
     return <form onSubmit={(e) => e.preventDefault()}>
                 <FormControl className='separador-inputs'>
                     <InputLabel htmlFor='cant-huespedes'>Cantidad de Huespedes</InputLabel>
                     <Input type='number' aria-label='Cantidad de huespedes' id='cant-huespedes' name='Cantidad de huespedes' required
-                    value={valorDe('cantHuespedes')} onChange={setValorDe('cantHuespedes')} inputProps={({'min':'1'})}/>
+                    value={valorDe('cantHuespedes')} onChange={setValorDe('cantHuespedes')} inputProps={({'min':'1', 'max': `${maxHuespedes}`})}/>
                 </FormControl>
                 <FormControl className='separador-inputs'>
                     <TextField type='date' label='Fecha de Inicio'  aria-label='Fecha de Inicio' id='fecha-inicio' name='fecha-inicio' required 
-                    value={valorDe('fechaInicio')} onChange={setValorDe('fechaInicio')}/>
+                    value={valorDe('fechaInicio')} onChange={setValorDe('fechaInicio')} className='text-field-input'/>
                 </FormControl>
                 <FormControl className='separador-inputs'>
                     <TextField type='date' label='Fecha de Finalización' defaultValue={fechaFinal()} aria-label='Fecha de Finalizacion' id='fecha-fin' name='fecha-fin' required
-                    alue={valorDe('fechaFinal')} onChange={setValorDe('fechaFinal')}/>
+                    alue={valorDe('fechaFinal')} onChange={setValorDe('fechaFinal')} className='text-field-input'/>
                 </FormControl>
-                    <Button variant='contained' className='boton-reservar'>Reservar</Button>
+                    <Button variant='contained' className='boton-reservar' onClick={revisarValores}>Reservar</Button>
             </form>
 } 
 
@@ -61,6 +69,12 @@ const AlojamientoDetailLoaded = ({alojamientoDetallado, fillFotos}) => {
     
     const [showedFoto, setShowed] = useState(fillFotos(alojamientoDetallado))
     const [errorReserva, setErrorReserva] = useState(undefined)
+    const [reserva, setReserva] = useState(undefined)
+    const [open, setOpen] = useState(true)
+    
+        const alCerrar = () => {
+            setOpen(false)
+        }
     const handleLeft = () => {
         setShowed(prev => {
             const nuevoIndice = prev.indice === 0 ? prev.indice : prev.indice - 1
@@ -70,11 +84,13 @@ const AlojamientoDetailLoaded = ({alojamientoDetallado, fillFotos}) => {
     const crearReserva = async (datosReserva) => {
         try {
            datosReserva.huespedReservador = huespedID
+           datosReserva.alojamiento = alojamientoDetallado.id
+           console.log(datosReserva)
            const reservaNueva = await hacerReserva(datosReserva)
-
+           setReserva(reservaNueva)
         }catch (error) {
             setErrorReserva(error)
-
+            console.error(error)
         }
     }
     
@@ -115,9 +131,15 @@ const AlojamientoDetailLoaded = ({alojamientoDetallado, fillFotos}) => {
                     <p>Hasta {alojamientoDetallado.cantHuespedesMax} huesped/es</p>
                 </div>
                 <div className="buying-section">
-                    <Formulario/>
+                    <Formulario maxHuespedes={alojamientoDetallado.cantHuespedesMax} crearReserva={crearReserva}/>
                 </div>
             </div>
+            {reserva ? <Dialog  aria-labelledby="titulo-error"  aria-describedby="mensaje-error" open={open} onClose={alCerrar} className='dialogo-error' fullWidth={true} >
+            <DialogTitle id="titulo-error">Se ha concretado su reserva!</DialogTitle>
+            <DialogContent>
+                 <p id="mensaje-error">Reserva: {reserva.id}</p>
+            </DialogContent>
+        </Dialog> : (errorReserva ? <Error open={open} alCerrar={alCerrar} mensajeDeError={errorReserva.response.data.error} nombreError={errorReserva.response.data.error}/> : <></>)}
         </div>
         </>  
     )
